@@ -12,6 +12,7 @@ import (
 	"github.com/joho/godotenv"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/providers/github"
@@ -21,6 +22,15 @@ import (
 
 func main() {
 	app := fiber.New()
+
+	def := cors.Config{
+		AllowOrigins:     "*",
+		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
+		AllowCredentials: true,
+	}
+
+	app.Use(cors.New(def))
+
 	godotenv.Load()
 	config := configuration.FromEnv()
 
