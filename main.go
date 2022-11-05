@@ -9,8 +9,10 @@ import (
 	"log"
 
 	jwtware "github.com/gofiber/jwt/v3"
+	"github.com/joho/godotenv"
 
 	"github.com/gofiber/fiber/v2"
+
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/providers/github"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -19,6 +21,7 @@ import (
 
 func main() {
 	app := fiber.New()
+	godotenv.Load()
 	config := configuration.FromEnv()
 
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(config.MongoURI))
