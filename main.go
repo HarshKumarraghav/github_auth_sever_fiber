@@ -7,6 +7,7 @@ import (
 	"alphacoder/pkg/user"
 	"context"
 	"log"
+	"os"
 
 	jwtware "github.com/gofiber/jwt/v3"
 	"github.com/joho/godotenv"
@@ -53,5 +54,5 @@ func main() {
 	app.Use(jwtware.New(jwtware.Config{
 		SigningKey: []byte(config.JwtSecret),
 	}))
-	app.Listen(":3030")
+	app.Listen(":" + os.Getenv("PORT"))
 }
